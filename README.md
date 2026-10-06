@@ -13,4 +13,6 @@
 - [Налаштування редактора та Git ignore](docs/editor-config.md)
 - [Шаблон README](docs/readme-template.md)
 - [Чек-лист рецензування](docs/code-review.md)
-- [Розбір конфлікту](docs/conflict.md)
+- [Розбір конфлікту](docs/conflict.md)## Перевірка remote
+
+Локальну теку можна перейменувати, не змінюючи адресу віддаленого репозиторію.
