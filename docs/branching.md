@@ -19,3 +19,12 @@
 git switch main
 git pull
 git switch -c feature/ім'я-тема
+
+## Локальний hook для повідомлень комітів
+
+Hook зберігається у .githooks/commit-msg і перевіряє формат першого рядка повідомлення коміту. Дозволені типи: feat, fix, docs, chore, refactor і test. Наприклад: docs: update branching guide.
+
+Після клонування кожен учасник окремо під'єднує hook у своїй копії репозиторію:
+
+```bash
+git config core.hooksPath .githooks

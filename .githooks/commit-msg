@@ -1,0 +1,12 @@
+#!/bin/sh
+
+message_file=$1
+subject=$(sed -n '1p' "$message_file")
+
+if printf '%s\n' "$subject" | grep -Eq '^(feat|fix|docs|chore|refactor|test): .+'; then
+    exit 0
+fi
+
+echo "Помилка: формат коміту — тип: короткий опис" >&2
+echo "Приклад: docs: update branching guide" >&2
+exit 1
