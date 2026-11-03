@@ -32,3 +32,24 @@
 
 bash lab-03/backup.sh --source "$HOME/my\_project" --dest "$HOME/backups"
 
+---
+
+# Монітор доступності API (`api_monitor.py`)
+
+## Призначення
+Скрипт `api_monitor.py` призначений для перевірки списку HTTP/HTTPS цілей (endpoint'ів) з JSON-конфігурації, виявлення типів збоїв (DNS, Connection Refused, Timeout, SSL, Несподіваний статус-код, Повільна відповідь) та надсилання сповіщень у месенджер через Webhook.
+
+## Схема конфігурації (`targets.json`)
+Файл конфігурації знаходиться за шляхом `lab-03/config/targets.json` і містить масив об'єктів наступної структури:
+
+```json
+[
+  {
+    "name": "Назва цілі для логів",
+    "url": "[https://example.com/api](https://example.com/api)",
+    "expected_code": 200,
+    "timeout": 5,
+    "latency_threshold": 2.0
+  }
+]
+
