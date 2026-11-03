@@ -1,0 +1,39 @@
+{
+  "targets": [
+    {
+      "name": "healthy",
+      "url": "https://httpbin.org/status/200",
+      "expected_status": 200,
+      "timeout_seconds": 5,
+      "slow_threshold_seconds": 2
+    },
+    {
+      "name": "dns-error",
+      "url": "https://lab-domain-does-not-exist.invalid/",
+      "expected_status": 200,
+      "timeout_seconds": 3,
+      "slow_threshold_seconds": 2
+    },
+    {
+      "name": "connection-refused",
+      "url": "http://127.0.0.1:1/",
+      "expected_status": 200,
+      "timeout_seconds": 3,
+      "slow_threshold_seconds": 2
+    },
+    {
+      "name": "expired-certificate",
+      "url": "https://expired.badssl.com/",
+      "expected_status": 200,
+      "timeout_seconds": 5,
+      "slow_threshold_seconds": 2
+    },
+    {
+      "name": "unexpected-status",
+      "url": "https://httpbin.org/status/404",
+      "expected_status": 200,
+      "timeout_seconds": 5,
+      "slow_threshold_seconds": 2
+    }
+  ]
+}
