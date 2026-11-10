@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> Перевірка pre-push: запуск автоматичних тестів..."
+
+if python3 -m unittest discover -s lab-03/tests -v; then
+    echo "==> Тести успішно пройдено! Push дозволено."
+    exit 0
+else
+    echo "==> Тести завершилися з помилкою! Push скасовано." >&2
+    exit 1
+fi
