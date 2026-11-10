@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> Перевірка pre-commit: аналіз staged-файлів..."
+
+FILES=()
+while IFS= read -r -d '' file; do
+    FILES+=("$file")
+done < <(git diff --cached --name-only -z --diff-filter=ACM)
+
+if [ ${#FILES[@]} -eq 0 ]; then
+    exit 0
+fi
+
+ERRORS=0
+
+for file in "${FILES[@]}"; do
+    if [[ "$file" == *.sh ]]; then
+        if ! command -v shellcheck &> /dev/null; then
+            echo "Помилка: ShellCheck не встановлено на системі!" >&2
+            exit 1
+        fi
+        echo "Перевірка Shell-скрипту: $file"
+        if ! shellcheck "$file"; then
+            ERRORS=$((ERRORS + 1))
+        fi
+    elif [[ "$file" == *.py ]]; then
+        echo "Перевірка Python-файлу: $file"
+        if ! python3 -m py_compile "$file"; then
+            ERRORS=$((ERRORS + 1))
+        fi
+    fi
+done
+
+if [ $ERRORS -gt 0 ]; then
+    echo "==> Перевірку pre-commit не пройдено! Знайдено помилок: $ERRORS" >&2
+    exit 1
+fi
+
+echo "==> Усі pre-commit перевірки пройдено успішно."
+exit 0

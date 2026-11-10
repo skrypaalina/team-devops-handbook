@@ -53,3 +53,16 @@ bash lab-03/backup.sh --source "$HOME/my\_project" --dest "$HOME/backups"
   }
 ]
 
+---
+
+## 3. Інтеграція з Git (Завдання 3)
+
+### Встановлення хуків у локальному клоні
+Локальні хуки зберігаються у версіонованій теці `lab-03/hooks/`. Оскільки Git не активує хуки автоматично після клонування, кожен розробник має виконати налаштування у своєму локальному репозиторії:
+
+**На macOS (Terminal):**
+```bash
+chmod +x lab-03/hooks/pre-commit lab-03/hooks/pre-push
+git config core.hooksPath lab-03/hooks
+git config --get core.hooksPath
+
